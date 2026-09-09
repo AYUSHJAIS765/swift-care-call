@@ -14,13 +14,173 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      appointments: {
+        Row: {
+          created_at: string
+          doctor_id: string
+          doctor_notes: string
+          id: string
+          patient_age: number | null
+          patient_id: string
+          patient_name: string
+          reason: string
+          scheduled_at: string
+          status: string
+        }
+        Insert: {
+          created_at?: string
+          doctor_id: string
+          doctor_notes?: string
+          id?: string
+          patient_age?: number | null
+          patient_id: string
+          patient_name: string
+          reason?: string
+          scheduled_at: string
+          status?: string
+        }
+        Update: {
+          created_at?: string
+          doctor_id?: string
+          doctor_notes?: string
+          id?: string
+          patient_age?: number | null
+          patient_id?: string
+          patient_name?: string
+          reason?: string
+          scheduled_at?: string
+          status?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "appointments_doctor_id_fkey"
+            columns: ["doctor_id"]
+            isOneToOne: false
+            referencedRelation: "doctors"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      doctors: {
+        Row: {
+          bio: string
+          created_at: string
+          email: string
+          fee: number
+          id: string
+          languages: string[]
+          name: string
+          photo_key: string
+          qualifications: string[]
+          rating: number
+          reviews_count: number
+          specialty: string
+          user_id: string | null
+          verified: boolean
+          years_experience: number
+        }
+        Insert: {
+          bio?: string
+          created_at?: string
+          email: string
+          fee?: number
+          id?: string
+          languages?: string[]
+          name: string
+          photo_key?: string
+          qualifications?: string[]
+          rating?: number
+          reviews_count?: number
+          specialty: string
+          user_id?: string | null
+          verified?: boolean
+          years_experience?: number
+        }
+        Update: {
+          bio?: string
+          created_at?: string
+          email?: string
+          fee?: number
+          id?: string
+          languages?: string[]
+          name?: string
+          photo_key?: string
+          qualifications?: string[]
+          rating?: number
+          reviews_count?: number
+          specialty?: string
+          user_id?: string | null
+          verified?: boolean
+          years_experience?: number
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          created_at: string
+          email: string
+          full_name: string
+          id: string
+          role: string
+        }
+        Insert: {
+          created_at?: string
+          email?: string
+          full_name?: string
+          id: string
+          role?: string
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          full_name?: string
+          id?: string
+          role?: string
+        }
+        Relationships: []
+      }
+      reviews: {
+        Row: {
+          author: string
+          comment: string
+          created_at: string
+          doctor_id: string
+          id: string
+          rating: number
+        }
+        Insert: {
+          author: string
+          comment?: string
+          created_at?: string
+          doctor_id: string
+          id?: string
+          rating?: number
+        }
+        Update: {
+          author?: string
+          comment?: string
+          created_at?: string
+          doctor_id?: string
+          id?: string
+          rating?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "reviews_doctor_id_fkey"
+            columns: ["doctor_id"]
+            isOneToOne: false
+            referencedRelation: "doctors"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      claim_doctor_profile: { Args: never; Returns: string }
+      owns_doctor: { Args: { _doctor_id: string }; Returns: boolean }
     }
     Enums: {
       [_ in never]: never
